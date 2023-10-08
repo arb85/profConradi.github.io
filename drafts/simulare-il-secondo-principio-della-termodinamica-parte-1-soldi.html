@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Simulare il secondo principio della termodinamica (parte 1: soldi)</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <meta name="description" content="Una simulazione in Python del secondo principio della termodinamica." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Che forma ha la polvere sotto il divano <strong>Sulla scuola, sulla fisica, sulla matematica e sui computer</strong></a></h1>
+                <nav><ul>
+                    <li><a href="/pages/chi-sono.html">Chi sono?</a></li>
+                    <li><a href="/pages/seminari-e-convegni.html">Seminari e convegni</a></li>
+                    <li><a href="/category/ia.html">IA</a></li>
+                    <li><a href="/category/matematica.html">Matematica</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/drafts/simulare-il-secondo-principio-della-termodinamica-parte-1-soldi.html" rel="bookmark"
+           title="Permalink to Simulare il secondo principio della termodinamica (parte 1: soldi)">Simulare il secondo principio della termodinamica (parte 1: soldi)</a></h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="@S_Conradi">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2023-09-20T00:00:00+02:00">
+                Published: Mer 20 Settembre 2023
+        </abbr>
+		<br />
+        <abbr class="modified" title="2023-09-20T00:00:00+02:00">
+                Updated: Mer 20 Settembre 2023
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/simone-conradi.html">Simone Conradi</a>
+        </address>
+<p>In <a href="/category/fisica.html">Fisica</a>.</p>
+<p>tags: <a href="/tag/fisica.html">fisica</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->      <h3>Persone e denaro</h3>
+<p>Ipotizziamo un esperimento sociale un poco assurdo: in una nazione lo stato ha distribuito a tutti i suoi cittadini la stessa quantità di denaro. Prima di questa distribuzione nessun cittadino possedeva denaro, dopo di essa cascuno cittadino si è ritrovato in tasca <strong>1 Kinetic</strong>. A tutti i cittadini è vietato scambiare denaro con abitanti di altre nazioni, ma sono possibili scambi di denaro interni secondo uno schema ben preciso illustrato di seguito.</p>
+<p>Ogni volta che due cittadini si incontrano, mettono in comune tutto il loro denaro e dividono il gruzzolo in due parti perfettamente a caso. Quotidianamente avvengono moltissimi incontri e quindi scambi di denaro.</p>
+<p>Traduciamo in formule questa operazione di suddivisione del denaro durante un incontro tra due persone. Definiamo le seguenti grandezze:</p>
+<ul>
+<li><span class="math">\(e_1\)</span> è il denaro posseduto dal primo cittadino prima dell'incontro;</li>
+<li><span class="math">\(e_2\)</span> è il denaro posseduto dal secondo cittadino prima dell'incontro;</li>
+<li><span class="math">\(e_1'\)</span> è il denaro posseduto dal primo cittadino dopo l'incontro;</li>
+<li><span class="math">\(e_2'\)</span> è il denaro posseduto dal secondo cittadino dopo l'incontro.</li>
+</ul>
+<p>Visto che non si perde denaro è chiaro che <span class="math">\(e_1+e_2=e_1'+e_2'\)</span> che equivale all'ammontare del gruzzolo di cui sopra. Per dividerlo in due parti a caso sorteggiamo un numero reale <span class="math">\(x\)</span> compreso tra 0 e 1. Il valore di <span class="math">\(x\)</span> è sorteggiato da una opportuna distribuzione di probabilità <span class="math">\(p(x)\)</span> decisa dal governo della nazione.
+Quindi possiamo dire che il denare che rimane in tasta alle due persone è:</p>
+<ul>
+<li><span class="math">\(e_1'=x (e_1+e_2)\)</span>;</li>
+<li><span class="math">\(e_1'=(1-x) (e_1+e_2)\)</span></li>
+</ul>
+<p>Affinchè lo scambio di denaro sia in media equo, la distribuzione di probabilità <span class="math">\(p(x)\)</span> deve essere simmetrica rispetto all'asse <span class="math">\(x=\frac{1}{2}\)</span>.</p>
+<p>A questo punto la domanda è: <strong>come evolve la distribuzione della ricchezza dei cittadini di questa ipotetica e fantasiosa nazione?</strong></p>
+<p>Proviamo a rispondere simulando questa ipotetica economia al calcolatore, precisamente mediante un <a href="1">modello ad agenti</a>. Scopriremo che la risposta alla domanda dipende  dalla funzione <span class="math">\(p(x)\)</span> introdotta sopra.</p>
+<p>Prima di procedere facciamo ancora una riflessione sulla distribuzione di denaro nella nazione. Immediadamente dopo la distribuzione iniziale del denaro tutti i cittadini possiedono <strong>1 Kinetic</strong>: questa situazione è estremamente ordinata. Esiste un solo modo possibile di realizzarla ed è quello in cui ogni persona possiede <strong>1 Kinetic</strong>. Spiegamo meglio come contare i modi di realizzare una distribuzione di denaro con un secondo esempio semplice ma un poco più disordinato del primo: tutti i cittadini possiedono <strong>1 Kinetic</strong> tranne una persona che possiede <strong>2 Kinetic</strong>. Se i cittadini sono <span class="math">\(N\)</span> in totale, questa situazione è realizzabile in N modi perchè ho <span class="math">\(N\)</span> possibilità diverse di estrarre il cittadino fortunato con in tasca <strong>2 Kinetic</strong>. Possiamo andare oltre e generalizzare questo calcolo, ma lasciamo quest'onere alla simulazione.
+È utile contare i modi in cui è possibile realizzare una determinata distribuzione di ricchezza? Si, perchè consente di calcolare l'entropia della distribuzione: se <span class="math">\(W\)</span> è il numero di modi di generare la distribuzione, l'entropia <span class="math">\(S\)</span> vale:</p>
+<p><span class="math">\(S=k \log(W)\)</span></p>
+<p>secondo la definizione statistica di entropia data da Boltzman. Porremo <span class="math">\(k = 1\)</span> e tratteremo l'entropia come grandezza adimensionale.</p>
+<h3>La simulazione</h3>
+<blockquote>
+<p>“A simulation is the answer to the question, “What if…?”</p>
+<p><em>Richard W. Hamming</em></p>
+</blockquote>
+<p>Il codice della simualazione è disponibile sul mio <a href="https://github.com/profConradi/Python_Simulations/blob/main/Statistical_Approach_2nd_law.ipynb">repository Github</a>. 
+Consideriamo divere possibilità per la distribuzione di probabiltà <span class="math">\(p(x)\)</span>.Utilizziamo il parametro <span class="math">\(d\)</span> intero (<span class="math">\(d\ge 2\)</span>) per parametrizzare la famiglia di funzioni  <span class="math">\(p(x)\)</span> nel modo seguente:</p>
+<p><span class="math">\(p_d(x) = (x-x^2)^{\frac{d-2}{2}}\)</span></p>
+<p>Torneremo sulla forma di queste funzioni più avanti.
+Ogni simulazione coinvolge 5000 persone e dura 20000 passi elementari: a ogni passo due cittadini a caso si incontrano, mettono sul tavolo tutto il loro denaro in loro possesso e se lo ridistribuiscono secondo le proporzioni <span class="math">\(x\)</span> e <span class="math">\(1-x\)</span>. <span class="math">\(x\)</span> è stato estratto a caso secondo la distribuzione di probabilità <span class="math">\(p_d(x)\)</span>. Su come estrarre un numero a caso secondo una distribuzione di probabilità data scriverò un articoletto prossimamente.</p>
+<p>Vediamo che succede per i primi valori di <span class="math">\(d\)</span>. Il grafico seguente rappresenta per i 4 casi <span class="math">\(d=2, 3, 4, 5\)</span>:</p>
+<ul>
+<li>la funzione <span class="math">\(p_d(x)\)</span> a sinistra;</li>
+<li>la distribuzione della ricchezza dopo 20000 passi a destra.</li>
+</ul>
+<p><img alt="prob" src="/images/prob_vs_d.png"></p>
+<p>Nel caso <span class="math">\(d=2\)</span> tutti i valori di <span class="math">\(x\)</span> tra 0 e 1 sono equiprobabili.</p>
+<div align="center">
+  <video src="https://github.com/profConradi/Python_Simulations/blob/e4b7da047e00035c8668d497968a105be78e1405/videos/2nd_law_maxwell-boltzman.mov" width="400" />
+</div>
+
+<h3>Riferimenti</h3>
+<ol>
+<li><a href="https://iopscience.iop.org/article/10.1088/0143-0807/18/5/002/meta">A statistical approach to the second law of thermodynamics using a computer simulation, L. Bellomonte and R. M. Sperandeo-Mineo.</a></li>
+</ol>
+<p><strong>Copyright 2023 by Simone Conradi and licensed under a <a rel="license"
+  href="http://creativecommons.org/licenses/by/4.0/">
+  <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" />
+  Creative Commons Attribution 4.0 International License</a>.</strong></p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://twitter.com/S_Conradi">Twitter</a></li>
+                            <li><a href="https://github.com/profConradi">Github</a></li>
+                            <li><a href="mailto:conradi.simone@gmail.com">Gmail</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
