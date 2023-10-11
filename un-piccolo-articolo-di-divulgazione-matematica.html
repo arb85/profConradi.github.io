@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Un piccolo articolo di divulgazione matematica</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <meta name="description" content="Un piccolo articolo di divulgazione matematica." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Che forma ha la polvere sotto il divano <strong>Sulla scuola, sulla fisica, sulla matematica e sui computer</strong></a></h1>
+                <nav><ul>
+                    <li><a href="/pages/chi-sono.html">Chi sono?</a></li>
+                    <li><a href="/pages/seminari-e-convegni.html">Seminari e convegni</a></li>
+                    <li><a href="/category/ia.html">IA</a></li>
+                    <li class="active"><a href="/category/matematica.html">Matematica</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/un-piccolo-articolo-di-divulgazione-matematica.html" rel="bookmark"
+           title="Permalink to Un piccolo articolo di divulgazione matematica">Un piccolo articolo di divulgazione matematica</a></h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="@S_Conradi">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2023-10-11T00:00:00+02:00">
+                Published: Mer 11 Ottobre 2023
+        </abbr>
+		<br />
+        <abbr class="modified" title="2023-10-11T00:00:00+02:00">
+                Updated: Mer 11 Ottobre 2023
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/simone-conradi.html">Simone Conradi</a>
+        </address>
+<p>In <a href="/category/matematica.html">Matematica</a>.</p>
+<p>tags: <a href="/tag/matematica.html">matematica</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->      <p>La rivista dell'<strong>IMI</strong> (Instituto de Matemática Interdisciplinar) dell'<strong>Università Complutense di Madrid</strong> mi ha invitato a scrivere un articolo di divulgazione per la loro rubrica 1+400: articoli di 400 parole corredati da una immagine.
+A <a href="https://www.ucm.es/imi/boletin00104#1+400"><strong>questo link</strong></a> trovate il mio articolo originale in lingua inglese.</p>
+<p>Qua sotto ne riporto una versione italiana tradotta da ChatGPT.</p>
+<h2>Esperimenti con gli autovalori</h2>
+<p>La matematica sperimentale è un ramo della matematica che sfuma i confini tra calcolo, intuizione e dimostrazione formale. Abbraccia un approccio empirico, utilizzando strumenti computazionali, tecniche di visualizzazione ed esperimenti numerici per ottenere una comprensione dei fenomeni matematici, scoprire pattern e formulare congetture. Nel suo lavoro <em>Some Basic Theorems on the Foundations</em> Kurt Gödel scrisse: "Se la matematica descrive un mondo oggettivo proprio come la fisica, non c'è motivo per cui i metodi induttivi non debbano essere applicati in matematica allo stesso modo in cui sono applicati in fisica." Un altro eminente matematico, Jacques Hadamard, credeva che lo scopo del rigore matematico fosse quello di sanzionare e legittimare le conquiste dell'intuizione<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. In questo senso, la matematica sperimentale è uno strumento prezioso per sperimentare e conquistare l'intuizione. Infine, nell'educazione matematica, la matematica sperimentale facilita lo sviluppo dell'intuizione attraverso un coinvolgimento diretto con oggetti matematici.</p>
+<p>La matematica sperimentale si basa pesantemente su metodi computazionali associati alla visualizzazione dei dati. Nelle mie esplorazioni, scrivo comunemente codice Python all'interno di Jupyter notebook, che offre strumenti per la computazione numerica, la manipolazione dei dati, la matematica simbolica e la visualizzazione avanzata. L'esplorazione discussa in questo articolo ha origine dal libro "Computational Discovery on Jupyter"<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> e inizia investigando gli autovalori di matrici costruite tramite la selezione casuale di elementi da un insieme finito di valori. La domanda principale è: quale è la distribuzione degli autovalori nel piano ℂ quando due elementi in tali matrici vengono designati come parametri reali, t₁ e t₂, e vengono permessi di variare?</p>
+<p>Esiste un elegante teorema<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>, il teorema dei cerchi di Gershgorin, che delinea una regione nel piano complesso che racchiude tutti gli autovalori di una matrice complessa quadrata. La regione di Gershgorin è un'unione di cerchi facilmente calcolabili e disegnabili usando carta e matita. Ma cosa succede quando si tratta di calcolare e visualizzare gli autovalori? Ho cercato di affrontare questa domanda creando un notebook Python in Jupyter<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>, utilizzando le funzioni di algebra lineare di NumPy e sfruttando le capacità di visualizzazione di Matplotlib.</p>
+<p>Il risultato è rappresentato nell'immagine seguente.</p>
+<p><img src="/images/image_lr.png" width="800" height="800" /></p>
+<p>Ogni sottografico rappresenta gli autovalori in ℂ per singole matrici, ciascuna campionata con 500.000 valori di t₁ e t₂ nell'intervallo [-20, 20] x [-20, 20]. Le matrici sono generate casualmente, con elementi estratti dall'insieme {0, -i, i, 1, 1/2}. Anche i due elementi sostituiti dai parametri t₁ e t₂ sono selezionati casualmente.
+Rimane incerto se questa visualizzazione possa fornire nuove intuizioni; potrebbe non rivelare nulla di significativo. Tuttavia, è innegabilmente una bellissima opera d'arte matematica.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>George Polya. Mathematical Discovery: On Understanding, Learning and Teaching Problem Solving (Combined Edition). John Wiley, Hoboken, NJ, 1981.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>https://computational-discovery-on-jupyter.github.io/Computational-Discovery-on-Jupyter/index.html&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Gerschgorin, S. "Über die Abgrenzung der Eigenwerte einer Matrix" Izv. Akad. Nauk. USSR Otd. Fiz.-Mat. Nauk 7, 749-754, 1931.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>My Python code: https://github.com/profConradi/eigenfish&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://twitter.com/S_Conradi">Twitter</a></li>
+                            <li><a href="https://github.com/profConradi">Github</a></li>
+                            <li><a href="mailto:conradi.simone@gmail.com">Gmail</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
