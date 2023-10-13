@@ -37,7 +37,7 @@
         </address>
 <p>In <a href="/category/fisica.html">Fisica</a>.</p>
 <p>tags: <a href="/tag/fisica.html">fisica</a> <a href="/tag/python.html">python</a> </p>
-</footer><!-- /.post-info --><h3>Persone e denaro</h3>
+</footer><!-- /.post-info --><h1>Persone e denaro</h1>
 <p>Ipotizziamo un esperimento sociale un poco assurdo: in una nazione lo stato ha distribuito a tutti i suoi cittadini la stessa quantità di denaro. Prima di questa distribuzione nessun cittadino possedeva denaro, dopo di essa cascuno cittadino si è ritrovato in tasca <strong>1 Kinetic</strong>. A tutti i cittadini è vietato scambiare denaro con abitanti di altre nazioni, ma sono possibili scambi di denaro interni secondo uno schema ben preciso illustrato di seguito.</p>
 <p>Ogni volta che due cittadini si incontrano, mettono in comune tutto il loro denaro e dividono il gruzzolo in due parti perfettamente a caso. Quotidianamente avvengono moltissimi incontri e quindi scambi di denaro.</p>
 <p>Traduciamo in formule questa operazione di suddivisione del denaro durante un incontro tra due persone. Definiamo le seguenti grandezze:</p>
@@ -56,11 +56,11 @@ Quindi possiamo dire che il denare che rimane in tasta alle due persone è:</p>
 <p>Affinchè lo scambio di denaro sia in media equo, la distribuzione di probabilità <span class="math">\(p(x)\)</span> deve essere simmetrica rispetto all'asse <span class="math">\(x=\frac{1}{2}\)</span>.</p>
 <p>A questo punto la domanda è: <strong>come evolve la distribuzione della ricchezza dei cittadini di questa ipotetica e fantasiosa nazione?</strong></p>
 <p>Proviamo a rispondere simulando questa ipotetica economia al calcolatore, precisamente mediante un <a href="1">modello ad agenti</a>. Scopriremo che la risposta alla domanda dipende  dalla funzione <span class="math">\(p(x)\)</span> introdotta sopra.</p>
-<p>Prima di procedere facciamo ancora una riflessione sulla distribuzione di denaro nella nazione. Immediadamente dopo la distribuzione iniziale del denaro tutti i cittadini possiedono <strong>1 Kinetic</strong>: questa situazione è estremamente ordinata. Esiste un solo modo possibile di realizzarla ed è quello in cui ogni persona possiede <strong>1 Kinetic</strong>. Spiegamo meglio come contare i modi di realizzare una distribuzione di denaro con un secondo esempio semplice ma un poco più disordinato del primo: tutti i cittadini possiedono <strong>1 Kinetic</strong> tranne una persona che possiede <strong>2 Kinetic</strong>. Se i cittadini sono <span class="math">\(N\)</span> in totale, questa situazione è realizzabile in N modi perchè ho <span class="math">\(N\)</span> possibilità diverse di estrarre il cittadino fortunato con in tasca <strong>2 Kinetic</strong>. Possiamo andare oltre e generalizzare questo calcolo, ma lasciamo quest'onere alla simulazione.
-È utile contare i modi in cui è possibile realizzare una determinata distribuzione di ricchezza? Si, perchè consente di calcolare l'entropia della distribuzione: se <span class="math">\(W\)</span> è il numero di modi di generare la distribuzione, l'entropia <span class="math">\(S\)</span> vale:</p>
+<p>Prima di procedere facciamo ancora una riflessione sulla distribuzione di denaro nella nazione. Immediadamente dopo la distribuzione iniziale del denaro tutti i cittadini possiedono <strong>1 Kinetic</strong>: questa situazione è estremamente ordinata. Esiste un solo modo possibile di realizzarla ed è quello in cui ogni persona possiede <strong>1 Kinetic</strong>. Spiegamo meglio come contare i modi di realizzare una distribuzione di denaro con un secondo esempio semplice ma un poco più disordinato del primo: tutti i cittadini possiedono <strong>1 Kinetic</strong> tranne una persona che possiede <strong>2 Kinetic</strong>. Se i cittadini sono <span class="math">\(N\)</span> in totale, questa situazione è realizzabile in N modi perché ho <span class="math">\(N\)</span> possibilità diverse di estrarre il cittadino fortunato con in tasca <strong>2 Kinetic</strong>. Possiamo andare oltre e generalizzare questo calcolo, ma lasciamo quest'onere alla simulazione.
+È utile contare i modi in cui è possibile realizzare una determinata distribuzione di ricchezza? Si, perché consente di calcolare l'entropia della distribuzione: se <span class="math">\(W\)</span> è il numero di modi di generare la distribuzione, l'entropia <span class="math">\(S\)</span> vale:</p>
 <p><span class="math">\(S=k \log(W)\)</span></p>
 <p>secondo la definizione statistica di entropia data da Boltzman. Porremo <span class="math">\(k = 1\)</span> e tratteremo l'entropia come grandezza adimensionale.</p>
-<h3>La simulazione</h3>
+<h2>La simulazione</h2>
 <blockquote>
 <p>“A simulation is the answer to the question, “What if…?”</p>
 <p><em>Richard W. Hamming</em></p>
@@ -70,17 +70,32 @@ Consideriamo divere possibilità per la distribuzione di probabiltà <span class
 <p><span class="math">\(p_d(x) = (x-x^2)^{\frac{d-2}{2}}\)</span></p>
 <p>Torneremo sulla forma di queste funzioni più avanti.
 Ogni simulazione coinvolge 5000 persone e dura 20000 passi elementari: a ogni passo due cittadini a caso si incontrano, mettono sul tavolo tutto il loro denaro in loro possesso e se lo ridistribuiscono secondo le proporzioni <span class="math">\(x\)</span> e <span class="math">\(1-x\)</span>. <span class="math">\(x\)</span> è stato estratto a caso secondo la distribuzione di probabilità <span class="math">\(p_d(x)\)</span>. Su come estrarre un numero a caso secondo una distribuzione di probabilità data scriverò un articoletto prossimamente.</p>
-<p>Vediamo che succede per i primi valori di <span class="math">\(d\)</span>. Il grafico seguente rappresenta per i 4 casi <span class="math">\(d=2, 3, 4, 5\)</span>:</p>
+<p>Vediamo che succede per i primi valori di <span class="math">\(d\)</span>. Il grafico seguente rappresenta nei i 4 casi <span class="math">\(d=2, 3, 4, 5\)</span>:</p>
 <ul>
-<li>la funzione <span class="math">\(p_d(x)\)</span> a sinistra;</li>
-<li>la distribuzione della ricchezza dopo 20000 passi a destra.</li>
+<li>la funzione <span class="math">\(p_d(x)\)</span>;</li>
+<li>la distribuzione della ricchezza dopo 20000 passi.</li>
 </ul>
-<p><img alt="prob" src="/images/prob_vs_d.png"></p>
-<div align="center">
-  <video src="https://github.com/profConradi/Python_Simulations/blob/e4b7da047e00035c8668d497968a105be78e1405/videos/2nd_law_maxwell-boltzman.mov" width="400" />
-</div>
+<p><img src="/images/prob_vs_d.png" width="800" height="800" /></p>
+<p>Nel caso <span class="math">\(d=2\)</span> tutti i valori di <span class="math">\(x\)</span> tra 0 e 1 sono equiprobabili e chi possiede poco o nulla costituisce la maggioranza della popolazione.
+All'aumentare di <span class="math">\(d\)</span> la distrubuzione di probabilità <span class="math">\(p_d(x)\)</span> tende a sfavorire sempre più gli scambi di denaro del tipo tutto o niente e di conseguenza i nullatenenti diminuiscono.</p>
+<p>Ma cosa c'entra tutto questo con il secondo principio della termodinamica? Perché abbiamo scelto quella particola forma analitica per la funzione <span class="math">\(p_d(x)\)</span>?
+Risponderemo a queste domande nel prossimo articolo. Intanto ecco due video delle simulazioni per <span class="math">\(d=2\)</span> e <span class="math">\(d=3\)</span>.</p>
+<h4>Caso <span class="math">\(d=2\)</span></h4>
+<script src="http://vjs.zencdn.net/4.0/video.js"></script>
+<video id="pelican-installation" class="video-js vjs-default-skin" controls
+preload="auto" width="800" poster=""
+data-setup="{}">
+<source src="/videos/2nd_law_random-uniform.mp4" type='video/mp4'>
+</video>
 
-<h3>Riferimenti</h3>
+<h4>Caso <span class="math">\(d=3\)</span></h4>
+<video id="pelican-installation" class="video-js vjs-default-skin" controls
+preload="auto" width="800"  poster=""
+data-setup="{}">
+<source src="/videos/2nd_law_maxwell-boltzman.mp4" type='video/mp4'>
+</video>
+
+<h2>Riferimenti</h2>
 <ol>
 <li><a href="https://iopscience.iop.org/article/10.1088/0143-0807/18/5/002/meta">A statistical approach to the second law of thermodynamics using a computer simulation, L. Bellomonte and R. M. Sperandeo-Mineo.</a></li>
 </ol>
