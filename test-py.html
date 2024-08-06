@@ -10,22 +10,50 @@
 <body>
     <h1>Enhanced PyScript on GitHub Pages</h1>
 
-    <!-- Load Pyodide packages -->
-    <py-env>
-        - matplotlib
-    </py-env>
+    <py-config>
+        packages = [
+          "matplotlib"
+        ]
+        plugins = [
+          "https://pyscript.net/latest/plugins/python/py_tutor.py"
+        ]
+    </py-config>
 
-    <py-script>
+    <script type="py">
         import matplotlib.pyplot as plt
+        import matplotlib.tri as tri
         import numpy as np
 
-        x = np.linspace(0, 2 * np.pi, 100)
-        y = np.sin(x)
+        # First create the x and y coordinates of the points.
+        n_angles = 36
+        n_radii = 8
+        min_radius = 0.25
+        radii = np.linspace(min_radius, 0.95, n_radii)
 
-        plt.plot(x, y)
-        plt.title('Sine Wave')
-        plt.show()
-    </py-script>
+        angles = np.linspace(0, 2 * np.pi, n_angles, endpoint=False)
+        angles = np.repeat(angles[..., np.newaxis], n_radii, axis=1)
+        angles[:, 1::2] += np.pi / n_angles
+
+        x = (radii * np.cos(angles)).flatten()
+        y = (radii * np.sin(angles)).flatten()
+        z = (np.cos(radii) * np.cos(3 * angles)).flatten()
+
+        # Create the Triangulation; no triangles so Delaunay triangulation created.
+        triang = tri.Triangulation(x, y)
+
+        # Mask off unwanted triangles.
+        triang.set_mask(np.hypot(x[triang.triangles].mean(axis=1),
+                                 y[triang.triangles].mean(axis=1))
+                        < min_radius)
+
+        fig1, ax1 = plt.subplots()
+        ax1.set_aspect('equal')
+        tpc = ax1.tripcolor(triang, z, shading='flat')
+        fig1.colorbar(tpc)
+        ax1.set_title('tripcolor of Delaunay triangulation, flat shading')
+
+        display(fig1, target="mpl")
+    </script>
 
     <div>
         <py-repl>
